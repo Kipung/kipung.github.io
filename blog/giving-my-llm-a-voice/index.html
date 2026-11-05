@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fff4e6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0b0916" media="(prefers-color-scheme: dark)"><title>Giving My LLM a Voice — Building a Voice-Controlled AI Assistant · Kip Park</title><meta name="description" content="Building a fully local, hands-free voice assistant with Vosk, Ollama, and pyttsx3."><link rel="canonical" href="https://kipung.github.io/blog/giving-my-llm-a-voice/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="Kip Park — Blog" href="/rss.xml"><meta property="og:type" content="article"><meta property="article:published_time" content="2025-02-26T00:00:00.000Z"><meta property="og:title" content="Giving My LLM a Voice — Building a Voice-Controlled AI Assistant · Kip Park"><meta property="og:description" content="Building a fully local, hands-free voice assistant with Vosk, Ollama, and pyttsx3."><meta property="og:url" content="https://kipung.github.io/blog/giving-my-llm-a-voice/"><meta property="og:image" content="https://kipung.github.io/images/stock-108555.jpg"><meta name="twitter:card" content="summary_large_image"><meta property="og:site_name" content="Kip Park"><link rel="sitemap" href="/sitemap.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Giving My LLM a Voice — Building a Voice-Controlled AI Assistant","description":"Building a fully local, hands-free voice assistant with Vosk, Ollama, and pyttsx3.","image":"https://kipung.github.io/images/stock-108555.jpg","url":"https://kipung.github.io/blog/giving-my-llm-a-voice/","datePublished":"2025-02-26T00:00:00.000Z","author":{"@type":"Person","name":"Ki-Pung (Kip) Park","url":"https://pungpaak.com"}}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><script>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        if (localStorage.getItem('view') === 'simple') document.documentElement.classList.add('simple');
+        document.documentElement.dataset.wall = localStorage.getItem('wall') || 'lens';
+      } catch {}
+    </script><link rel="stylesheet" href="/_astro/Base.DS2K-3kG.css"></head><body class="page"><a class="skip" href="#main">Skip to content</a><header class="menubar"><a href="/" class="logo" aria-label="Kip Park, home"><span class="logo-orb" aria-hidden="true"></span><b>KipOS</b></a><nav aria-label="Main"><a href="/#about">About</a><a href="/#research">Research</a><a href="/#projects">Projects</a><a href="/blog" aria-current="page">Blog</a><a href="/#contact">Contact</a></nav><div class="tray"><a class="cv-link" href="/files/kip-park-cv.pdf">CV ↓</a><button class="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path></svg></button><button class="tray-btn" type="button" data-spotlight aria-label="Spotlight search" title="Spotlight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.6 10.6 14 14"></path></svg></button><span class="tray-ic" aria-hidden="true"><svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M1.6 4.6a10.6 10.6 0 0 1 14.8 0"></path><path d="M4.3 7.6a6.7 6.7 0 0 1 9.4 0"></path><path d="M6.9 10.4a3 3 0 0 1 4.2 0"></path><circle cx="9" cy="12.5" r=".9" fill="currentColor" stroke="none"></circle></svg></span><span class="tray-ic tray-batt" aria-hidden="true"><svg viewBox="0 0 27 13" fill="none" stroke="currentColor" stroke-width="1.3"><rect x=".8" y=".8" width="22.4" height="11.4" rx="3.4"></rect><path d="M25.6 4.9v3.2" stroke-width="2" stroke-linecap="round" opacity=".45"></path><rect x="2.8" y="2.8" width="13.5" height="7.4" rx="2" fill="currentColor" stroke="none"></rect></svg></span><time class="clock" aria-hidden="true"></time></div></header><main id="main"><article class="post"><header class="wrap narrow"><a href="/blog" class="back">← All posts</a><p class="meta eyebrow"><time datetime="2025-02-26T00:00:00.000Z">Feb 26, 2025</time><span aria-hidden="true">·</span><span>4 min read</span></p><h1>Giving My LLM a Voice — Building a Voice-Controlled AI Assistant</h1><p class="desc">Building a fully local, hands-free voice assistant with Vosk, Ollama, and pyttsx3.</p><p class="tags"><span class="tag">LLMs</span><span class="tag">Voice</span><span class="tag">Local AI</span></p></header><div class="wrap cover-wrap"><img class="cover" src="/images/stock-108555.jpg" alt="" width="1200" height="525"></div><div class="wrap narrow prose"><p>Hi, this is Kip! This would be my first official post on my website. I hope you find this interesting.</p>
+<p>Over the past few weeks, I’ve been working on something that’s been on my mind for a while — giving an LLM a literal voice.</p>
+<p>The idea? Build a voice-controlled AI assistant that lets me talk to a local LLM, have it process my prompts, and respond back, all without typing a single word. No cloud dependencies, no sending data over the internet — everything runs locally.</p>
+<p>It’s been a fun challenge, combining speech-to-text (STT), local LLM integration, and text-to-speech (TTS) to create a seamless, hands-free AI interaction.</p>
+<p>Here’s how it’s going so far.</p>
+<hr>
+<h2 id="the-why">The Why</h2>
+<p>I love the flexibility of modern LLMs, but typing out every interaction felt… limiting. Voice interactions feel more natural and immediate. Plus, there’s something cool about building your own “Jarvis” — a personal AI you can talk to directly.</p>
+<p>But I didn’t want to rely on cloud-based services like Google Assistant or Alexa. The goal was a fully offline, privacy-respecting assistant that runs locally on my machine.</p>
+<p><img src="/images/Voice_LLM_Pipeline.jpg" alt="Voice assistant pipeline: microphone → Vosk speech-to-text → Ollama LLM → pyttsx3 text-to-speech"></p>
+<h2 id="how-it-works-️">How It Works 🛠️</h2>
+<p>At a high level, the system works like this:</p>
+<ol>
+<li>I speak into the mic 🎙️</li>
+<li>The system transcribes my voice to text using Vosk</li>
+<li>A local LLM (running via Ollama) processes the text and generates a response 🤖</li>
+<li>The response is spoken back to me using pyttsx3 🔊</li>
+</ol>
+<p>It feels pretty fluid — I speak, it thinks, and then it talks back.</p>
+<p>I even threw in some conversation memory, so it remembers past prompts and can handle follow-up questions.</p>
+<hr>
+<h2 id="whats-working-right-now-">What’s Working Right Now 🚀</h2>
+<ul>
+<li><strong>Real-time voice input:</strong> The system listens for voice, processes the input, and recognizes when I’m done speaking.</li>
+<li><strong>Local LLM responses:</strong> Using Ollama, I’ve got an LLM model (Llama3.2:3b-instruct-fp16) that takes my transcribed prompts and responds accordingly.</li>
+<li><strong>Text-to-speech:</strong> Once the LLM responds, the message gets read out loud. It’s fun hearing the AI “speak” back.</li>
+<li><strong>Contextual conversations:</strong> Since it tracks conversation history in a simple JSON file, I can have multi-turn conversations like:
+“What’s the first element in the periodic table?” → “Hydrogen” → “What about 79?” →“Gold”— and it understands the context.</li>
+<li><strong>Voice-only operation:</strong> From start to finish, I can interact completely hands-free. No keyboard needed 🚫⌨️.</li>
+</ul>
+<hr>
+<h2 id="more-in-detail-">More in Detail 🧰</h2>
+<p>Here’s what I used to get everything running:</p>
+<ul>
+<li><strong>Speech-to-Text (STT)</strong>
+<ul>
+<li>Vosk handles the voice transcription. It’s lightweight, works offline, and doesn’t need cloud APIs.</li>
+<li>WebRTC VAD (Voice Activity Detection) helps detect when I’m actually speaking vs. background noise.</li>
+</ul>
+</li>
+<li><strong>LLM Integration</strong>
+<ul>
+<li>Ollama manages the local LLM models. I’m currently using one called “Llama3.2:3b-instruct-fp16”, but the setup allows for swapping models easily.</li>
+</ul>
+</li>
+<li><strong>Text-to-Speech (TTS)</strong>
+<ul>
+<li>pyttsx3 gives voice to the LLM responses. It runs locally and works across platforms.</li>
+</ul>
+</li>
+<li><strong>Audio Processing</strong>
+<ul>
+<li>PyAudio for handling the mic input and audio streaming.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/SCR-20250226-ialp.jpg" alt="Terminal output from the voice assistant"></p>
+<hr>
+<h2 id="challenges-along-the-way-️">Challenges Along the Way ⚠️</h2>
+<p>No project is without its hurdles, and this one had its fair share.</p>
+<ul>
+<li><strong>Latency issues:</strong> Initially, there was a noticeable lag between when I finished speaking and when the LLM would respond. It broke the flow.</li>
+<li><strong>Background noise:</strong> Whenever my voice input was mixed with some other noises in the background, it sometimes would erroneous input.</li>
+</ul>
+<hr>
+<h2 id="a-few-cool-moments-">A Few Cool Moments ✨</h2>
+<ul>
+<li><strong>Keyword-based termination:</strong> I added a simple feature where saying “terminate” immediately stops the assistant. No need to reach for the keyboard.</li>
+<li><strong>Fallback to text input:</strong> If I disable the mic, the assistant switches to text-based input — so I can still interact via the terminal if needed.</li>
+<li><strong>Hearing the LLM “think”:</strong> It’s a weirdly satisfying feeling when you ask the assistant a question, hear the slight pause as it “thinks,” and then it responds back with a complete answer. (I am making it sound like a feature, although, it was more of a bug that it is taking some time to respond).</li>
+</ul>
+<p><img src="/images/SCR-20250226-ifed.jpg" alt="Assistant responding in the terminal"></p>
+<h2 id="where-im-taking-this-next-">Where I’m Taking This Next 🔮</h2>
+<ul>
+<li><strong>Tool calling integration:</strong> I’m planning to give the assistant the ability to perform tasks, not just respond. Think opening apps, fetching files, or even controlling smart home devices — all via voice.</li>
+<li><strong>Custom wake word:</strong> Right now, the assistant is always listening, but I want to add a wake word (“Hey VoiceBot”) to make it feel more polished (and avoid accidental triggers).</li>
+<li><strong>Real-time streaming improvements:</strong> I’m working on reducing latency even further, possibly down to sub-second response times, by streaming audio to the STT engine as I speak.</li>
+</ul>
+<h2 id="final-thoughts-">Final Thoughts 💭</h2>
+<p>Building this voice-controlled LLM assistant has been a rewarding mix of audio processing, AI integration, and some creative problem-solving. It’s far from perfect, but hearing an LLM speak back to me — and knowing it’s all running locally — is a pretty awesome feeling.</p>
+<p>There’s still a lot I want to improve, but having a system that listens, thinks, and talks back is a great start.</p>
+<hr>
+<h2 id="would-love-your-thoughts-">Would Love Your Thoughts! 💡</h2>
+<ul>
+<li>Have you built something similar?</li>
+<li>Got tips on improving voice recognition or latency?</li>
+<li>Or just have ideas for cool features?</li>
+</ul>
+<p>I’d love to hear what you think! Drop a comment, send me a message, or let’s connect — always up for chatting about AI and technology. 🎤🤖💬</p>
+</div><footer class="wrap narrow end"><p>Thanks for reading! Questions or ideas? <a href="/#contact">Get in touch</a>.</p></footer></article></main><footer class="site-footer"><div class="foot"><span>© 2026 Kip Park · KipOS v1.0</span><span class="foot-links"><a href="https://github.com/kipung" rel="me">GitHub</a><a href="https://www.linkedin.com/in/kip-park" rel="me">LinkedIn</a><a href="/rss.xml">RSS</a></span></div></footer><script>
+      const clock = document.querySelector('.clock');
+      const tick = () => { if (clock) clock.textContent = new Date().toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); };
+      tick(); setInterval(tick, 30000);
+      document.querySelector('[data-spotlight]')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('kipos-spotlight'));
+      });
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video[autoplay]').forEach((v) => { v.pause(); v.controls = true; });
+      const themeButton = document.querySelector('.theme');
+      const scheme = matchMedia('(prefers-color-scheme: dark)');
+      const updateThemeButton = () => {
+        const dark = (document.documentElement.dataset.theme || (scheme.matches ? 'dark' : 'light')) === 'dark';
+        themeButton?.setAttribute('aria-pressed', String(dark));
+      };
+      updateThemeButton();
+      scheme.addEventListener('change', updateThemeButton);
+      themeButton?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const current =
+          root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        updateThemeButton();
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+    </script></body></html>

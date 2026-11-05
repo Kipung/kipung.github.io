@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="macOS-style wallpaper: teal, blue and emerald silk ribbons sweeping over a cool light base">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2=".75" y2="1">
+      <stop offset="0" stop-color="#e3edef"/>
+      <stop offset=".45" stop-color="#cfe2ea"/>
+      <stop offset="1" stop-color="#bfdccd"/>
+    </linearGradient>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1e3a5f" stop-opacity="0"/>
+      <stop offset=".18" stop-color="#1e40af" stop-opacity=".8"/>
+      <stop offset=".5" stop-color="#1d4ed8" stop-opacity=".92"/>
+      <stop offset=".78" stop-color="#2563eb" stop-opacity=".78"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0d9488" stop-opacity="0"/>
+      <stop offset=".2" stop-color="#0f766e" stop-opacity=".75"/>
+      <stop offset=".52" stop-color="#14b8a6" stop-opacity="1"/>
+      <stop offset=".8" stop-color="#2dd4bf" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#5eead4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="emerald" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#059669" stop-opacity="0"/>
+      <stop offset=".3" stop-color="#10b981" stop-opacity=".6"/>
+      <stop offset=".68" stop-color="#34d399" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#a7f3d0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#bae6fd" stop-opacity="0"/>
+      <stop offset=".3" stop-color="#7dd3fc" stop-opacity=".6"/>
+      <stop offset=".62" stop-color="#a5f3fc" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#e0f2fe" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="90"/>
+    </filter>
+    <radialGradient id="vig" cx=".5" cy=".42" r=".85">
+      <stop offset="0" stop-color="#0f172a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity=".10"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".10"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".06"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <ellipse cx="1120" cy="150" rx="430" ry="260" fill="#a8d5e2" opacity=".8" filter="url(#glow)"/>
+  <ellipse cx="250" cy="800" rx="420" ry="240" fill="#a7dcc0" opacity=".8" filter="url(#glow)"/>
+  <g filter="url(#soft)">
+    <!-- emerald ribbon, upper -->
+    <path fill="url(#emerald)" d="M-100 240 C 320 180 760 340 1120 200 C 1300 140 1460 120 1560 140 L 1560 230 C 1460 210 1300 230 1140 290 C 780 430 320 300 -100 340 Z"/>
+    <!-- deep blue ribbon, lower -->
+    <path fill="url(#navy)" d="M-100 700 C 320 560 700 800 1020 600 C 1240 470 1420 400 1560 420 L 1560 600 C 1420 580 1240 650 1040 780 C 720 980 320 760 -100 880 Z"/>
+    <!-- teal ribbon, center -->
+    <path fill="url(#teal)" d="M-100 560 C 300 430 760 640 1080 440 C 1280 320 1440 280 1560 300 L 1560 470 C 1440 450 1280 490 1100 600 C 780 800 300 620 -100 720 Z"/>
+    <!-- sky glint along the teal ribbon's edge -->
+    <path fill="url(#glint)" d="M-100 520 C 300 400 760 600 1080 410 C 1280 300 1440 260 1560 280 L 1560 350 C 1440 330 1280 370 1100 470 C 780 660 300 480 -100 580 Z"/>
+  </g>
+  <rect width="1440" height="900" fill="url(#sheen)"/>
+  <rect width="1440" height="900" fill="url(#vig)"/>
+  <rect width="1440" height="900" filter="url(#grain)" opacity=".045"/>
+</svg>

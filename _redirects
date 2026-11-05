@@ -1,0 +1,9 @@
+# Old GoDaddy site URLs -> new site (Cloudflare uses the first matching rule)
+/projects/f.rss  /rss.xml  301
+/projects/f.atom  /rss.xml  301
+/projects/f.json  /rss.xml  301
+/projects/f/%F0%9F%8E%93-the-ai-degree-planning-companion-%E2%80%94-part-1  /blog/ai-degree-planning-companion-part-1  301
+/projects/f/giving-my-llm-a-voice*  /blog/giving-my-llm-a-voice  301
+# Fallback for any other old post URL (only two posts ever existed).
+/projects/f/*  /blog  301
+/projects  /#projects  301

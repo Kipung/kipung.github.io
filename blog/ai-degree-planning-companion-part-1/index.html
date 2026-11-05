@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fff4e6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0b0916" media="(prefers-color-scheme: dark)"><title>The AI Degree Planning Companion: Part 1 · Kip Park</title><meta name="description" content="From idea to architecture: laying the foundation for an LLM-powered degree planning agent at CBU."><link rel="canonical" href="https://kipung.github.io/blog/ai-degree-planning-companion-part-1/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="Kip Park — Blog" href="/rss.xml"><meta property="og:type" content="article"><meta property="article:published_time" content="2025-08-01T00:00:00.000Z"><meta property="og:title" content="The AI Degree Planning Companion: Part 1 · Kip Park"><meta property="og:description" content="From idea to architecture: laying the foundation for an LLM-powered degree planning agent at CBU."><meta property="og:url" content="https://kipung.github.io/blog/ai-degree-planning-companion-part-1/"><meta property="og:image" content="https://kipung.github.io/images/stock-39107.jpg"><meta name="twitter:card" content="summary_large_image"><meta property="og:site_name" content="Kip Park"><link rel="sitemap" href="/sitemap.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The AI Degree Planning Companion: Part 1","description":"From idea to architecture: laying the foundation for an LLM-powered degree planning agent at CBU.","image":"https://kipung.github.io/images/stock-39107.jpg","url":"https://kipung.github.io/blog/ai-degree-planning-companion-part-1/","datePublished":"2025-08-01T00:00:00.000Z","author":{"@type":"Person","name":"Ki-Pung (Kip) Park","url":"https://pungpaak.com"}}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><script>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        if (localStorage.getItem('view') === 'simple') document.documentElement.classList.add('simple');
+        document.documentElement.dataset.wall = localStorage.getItem('wall') || 'lens';
+      } catch {}
+    </script><link rel="stylesheet" href="/_astro/Base.DS2K-3kG.css"></head><body class="page"><a class="skip" href="#main">Skip to content</a><header class="menubar"><a href="/" class="logo" aria-label="Kip Park, home"><span class="logo-orb" aria-hidden="true"></span><b>KipOS</b></a><nav aria-label="Main"><a href="/#about">About</a><a href="/#research">Research</a><a href="/#projects">Projects</a><a href="/blog" aria-current="page">Blog</a><a href="/#contact">Contact</a></nav><div class="tray"><a class="cv-link" href="/files/kip-park-cv.pdf">CV ↓</a><button class="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path></svg></button><button class="tray-btn" type="button" data-spotlight aria-label="Spotlight search" title="Spotlight"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.6 10.6 14 14"></path></svg></button><span class="tray-ic" aria-hidden="true"><svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M1.6 4.6a10.6 10.6 0 0 1 14.8 0"></path><path d="M4.3 7.6a6.7 6.7 0 0 1 9.4 0"></path><path d="M6.9 10.4a3 3 0 0 1 4.2 0"></path><circle cx="9" cy="12.5" r=".9" fill="currentColor" stroke="none"></circle></svg></span><span class="tray-ic tray-batt" aria-hidden="true"><svg viewBox="0 0 27 13" fill="none" stroke="currentColor" stroke-width="1.3"><rect x=".8" y=".8" width="22.4" height="11.4" rx="3.4"></rect><path d="M25.6 4.9v3.2" stroke-width="2" stroke-linecap="round" opacity=".45"></path><rect x="2.8" y="2.8" width="13.5" height="7.4" rx="2" fill="currentColor" stroke="none"></rect></svg></span><time class="clock" aria-hidden="true"></time></div></header><main id="main"><article class="post"><header class="wrap narrow"><a href="/blog" class="back">← All posts</a><p class="meta eyebrow"><time datetime="2025-08-01T00:00:00.000Z">Aug 1, 2025</time><span aria-hidden="true">·</span><span>5 min read</span></p><h1>The AI Degree Planning Companion: Part 1</h1><p class="desc">From idea to architecture: laying the foundation for an LLM-powered degree planning agent at CBU.</p><p class="tags"><span class="tag">LLMs</span><span class="tag">Agents</span><span class="tag">Education</span></p></header><div class="wrap cover-wrap"><img class="cover" src="/images/stock-39107.jpg" alt="" width="1200" height="525"></div><div class="wrap narrow prose"><h2 id="from-idea-to-architecture-laying-the-foundation-for-my-degree-planning-agent">From Idea to Architecture: Laying the Foundation for My Degree Planning Agent</h2>
+<hr>
+<h2 id="why-this-project">Why This Project?</h2>
+<p>Every student has faced the headache of trying to figure out their course plan. You’re told to follow a flowchart or check the catalog, but it’s not always clear what’s possible, what’s required, or even what makes the most sense for your goals.</p>
+<p>I remember trying to confirm a few things, and I couldn’t really find the answer anywhere, or I wasn’t sure. I wanted to ask a Student Success Coach, but our schedules didn’t line up many times. I had to wait days just to get clarity on a few little things that should’ve taken maybe 5 minutes.</p>
+<p>That experience stuck with me. With some other instances piling up, my perception of our Student Success Coach became someone who is unavailable, but someone who has the final say on whether I am on a good trajectory for my degree or not.</p>
+<p>It made me realize that what students really need isn’t just more PDFs or one-time meetings — we need a smart, always-available assistant that understands our school’s structure and can help us make decisions in real time (whenever we need to make a big change for our courses, it always happens after midnight).</p>
+<hr>
+<p><img src="/images/cbu-student-success.jpg" alt="CBU Office of Student Success"></p>
+<p>Soon after, I had the chance to work with the Office of Student Success at California Baptist University on an AI-driven initiative to support students. As we explored potential projects, degree planning quickly stood out as one of the most pressing and high-impact areas to improve. That led to this project becoming my first major focus: building an LLM-powered assistant to support, not replace, student advisors.</p>
+<p>During our meetings, a representative for the student success coaches shared that their inboxes are often filled with simple questions — the kind that could easily be answered with a quick search on the CBU website. These small requests end up taking time away from more important one-on-one advising. It was clear that a system like this could help relieve some of that pressure while empowering students to get answers faster.</p>
+<hr>
+<h2 id="researching-the-right-approach-as-a-student-in-a-moving-landscape">Researching the Right Approach (As a Student in a Moving Landscape)</h2>
+<p>When I first started working on this project as a student developer, the world of LLMs was already changing fast. ChatGPT had exploded in popularity, and universities everywhere — including many UCs — were rushing to adopt AI tools for advising, tutoring, and campus support.</p>
+<p>But as exciting as that was, it also felt like things were moving too quickly. Our team noticed that some schools were integrating commercial LLMs into their systems without fully addressing concerns around student privacy, data ownership, and institutional control.</p>
+<p>As a student worker with limited resources, diving into this space where everything moved so quickly meant learning everything from scratch and fast: how to run a model like Mistral locally, how to structure agentic behavior with tools like LangChain, how to connect knowledge graphs (Neo4j) and SQL databases, and how to do all of this in a way that respected student data and felt professional enough to deploy in a real academic setting.</p>
+<h2 id="how-the-research-started">How the Research Started</h2>
+<p>At first, I was just following the momentum, reading through every update I could find about open-source LLMs. I’d scroll through LinkedIn, check GitHub repos, and watch YouTube videos where people shared new ways to run models locally or use lightweight toolchains.</p>
+<p>But everything was changing so fast. New libraries, models, and frameworks, new ways to fine-tune were popping up constantly. It became overwhelming to keep track, so I started building a mind map-style documentation system just to organize everything I was learning.</p>
+<p>I focused mostly on the open-source side:</p>
+<ul>
+<li>LLMs that could run locally on small devices</li>
+<li>Graph-based reasoning (like Graph RAG)</li>
+<li>Embedding models, vector search</li>
+<li>Agent architectures with LangChain and streaming setups</li>
+</ul>
+<p>But it wasn’t just about the software — we also spent time exploring hardware options that could realistically support on-device inference. We looked into things like:</p>
+<ul>
+<li>NVIDIA Jetson boards for compact GPU acceleration</li>
+<li>Framework laptops as modular, upgradable development machines</li>
+<li>DGX systems and NVIDIA Spark AI boxes for more serious edge deployment</li>
+</ul>
+<p>The goal was to find a setup that was both realistic and student-accessible — something that didn’t rely on huge cloud infrastructure, but still delivered real performance.</p>
+<p>Here’s one of the early versions of that mind map — chaotic, colorful, and packed with experimentation:</p>
+<p><img src="/images/SCR-20250731-tivc.jpg" alt="Early research mind map"></p>
+<h2 id="from-research-to-system-building-the-flow">From Research to System: Building the Flow</h2>
+<p>After all the reading, experimenting, and mapping things out, the system slowly started to take shape. What began as a vague idea, “what if an AI could help students plan their classes?” turned into something concrete.</p>
+<p>Here’s a visual of the current service flow for the AI Degree Planning Companion:</p>
+<p><img src="/images/SCR-20250731-tovg.jpg" alt="Service flow: a student logs in, the app pulls their records from the school database and shows their progress, then the student either chats with the AI agent, books an appointment with a Student Success Coach, or opens an existing degree planning guide. Behind the agent, Mistral answers using a PostgreSQL student database, a Neo4j course graph, and all-MiniLM-L6-v2 embeddings"></p>
+<h2 id="current-tech-stack">Current Tech Stack</h2>
+<p>Here’s what’s running under the hood:</p>
+<ul>
+<li>Frontend: React + Tailwind, with a chat interface inspired by modern AI apps</li>
+<li>Backend: FastAPI + Docker, serving both REST and streaming (SSE) endpoints</li>
+<li>LLM: Local deployment of Mistral (via ollama), using LangChain for agent behavior</li>
+<li>Knowledge Graph: Neo4j, modeling prerequisites and degree flows</li>
+<li>Relational DB: PostgreSQL, for user records and course metadata</li>
+<li>Embeddings + Vector Search: all-MiniLM-L6-v2 + FAISS for semantic search</li>
+<li>Streaming: Real-time token-level streaming from backend to frontend with SSE</li>
+</ul>
+<p>It’s modular and built to be improved — each component can be upgraded as the ecosystem evolves.</p>
+<h2 id="whats-coming-next">What’s Coming Next</h2>
+<p>This is just the foundation. Coming up:</p>
+<ul>
+<li>Memory integration so the agent can track long-term student goals</li>
+<li>Better tool reasoning to decide when to query graph vs. SQL vs. vector store</li>
+<li>Expanding course coverage to include more departments and elective options</li>
+<li>UI polish + markdown rendering to make the chat feel smooth and informative</li>
+<li>Possibly releasing a limited public demo for feedback and iteration</li>
+</ul>
+<hr>
+<p>Thanks for reading — if you’re working on anything similar or exploring LLMs for education, I’d love to connect.</p>
+</div><footer class="wrap narrow end"><p>Thanks for reading! Questions or ideas? <a href="/#contact">Get in touch</a>.</p></footer></article></main><footer class="site-footer"><div class="foot"><span>© 2026 Kip Park · KipOS v1.0</span><span class="foot-links"><a href="https://github.com/kipung" rel="me">GitHub</a><a href="https://www.linkedin.com/in/kip-park" rel="me">LinkedIn</a><a href="/rss.xml">RSS</a></span></div></footer><script>
+      const clock = document.querySelector('.clock');
+      const tick = () => { if (clock) clock.textContent = new Date().toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); };
+      tick(); setInterval(tick, 30000);
+      document.querySelector('[data-spotlight]')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('kipos-spotlight'));
+      });
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video[autoplay]').forEach((v) => { v.pause(); v.controls = true; });
+      const themeButton = document.querySelector('.theme');
+      const scheme = matchMedia('(prefers-color-scheme: dark)');
+      const updateThemeButton = () => {
+        const dark = (document.documentElement.dataset.theme || (scheme.matches ? 'dark' : 'light')) === 'dark';
+        themeButton?.setAttribute('aria-pressed', String(dark));
+      };
+      updateThemeButton();
+      scheme.addEventListener('change', updateThemeButton);
+      themeButton?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const current =
+          root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        updateThemeButton();
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+    </script></body></html>
