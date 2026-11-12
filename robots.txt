@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kipung.github.io/sitemap.xml
+Sitemap: https://pungpaak.com/sitemap.xml
